@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('layouts/header'); -%>
+
+  <body>
+    <!-- Navigation-->
+    <%- include('layouts/navbar'); -%>
+      <!-- Page Header-->
+      <header class="masthead" style="background-image: url('assets/img/contact-bg.jpg')">
+        <div class="container position-relative px-4 px-lg-5">
+          <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+              <div class="page-heading">
+                <h1>G PAGE</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- Main Content-->
+      <main class="mb-4">
+        <% if (typeof user !=='undefined' && user.length> 0 ) { %>
+
+          <div class="card-body p-md-5 text-black">
+            <h2>Scroll Down for user information</h2>
+          </div>
+          <% } %>
+            <div class="container2">
+
+              <% if (typeof user !=='undefined' && user.length> 0 ) { %>
+
+                <div class="card-body p-md-5 text-black">
+                  <h3 class="mb-5 text-uppercase">G Test User Details</h3>
+                  <form action="/updateInformation" method="POST" id="form2">
+                    <div class="row">
+                      <h3>Personal Details</h3>
+
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <label class="form-label">First name</label>
+                          <input type="text" id=" fname" disabled name="fname" value=<%- `"${user[0].fname}"` -%>
+                          class="form-control form-control-lg" />
+
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <label class="form-label">Last name</label>
+                          <input type="text" id=" lname" disabled name="lname" value=<%- `"${user[0].lname}"`
+                            -%>class="form-control form-control-lg" />
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <label class="form-label">Username</label>
+                          <input type="text" id=" fname" disabled name="Username" value=<%-
+                            `"${user[0].authId.Username}"` -%>
+                          class="form-control form-control-lg" />
+
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <label class="form-label">User Type</label>
+                          <input type="text" id=" lname" disabled name="UserType" value=<%-
+                            `"${user[0].authId.UserType}"` -%>class="form-control form-control-lg" />
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <label class="form-label">Appointment Date</label>
+                          <input type="text" id=" fname" disabled name="Date" value=<%-
+                            `"${user[0].appointmentId.Date}"` -%>
+                          class="form-control form-control-lg" />
+
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <label class="form-label">Appointment Time</label>
+                          <input type="text" id=" lname" disabled name="Time" value=<%-
+                            `"${user[0].appointmentId.Time}"` -%>class="form-control form-control-lg" />
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+
+                      <div class="form-outline mb-4">
+                        <label class="form-label">Age</label>
+                        <input type="number" id="age" disabled name="age" value=<%- `"${user[0].Age}"`
+                          -%>class="form-control
+                        form-control-lg" />
+
+                      </div>
+
+
+                      <div class="form-outline mb-4">
+                        <label class="form-label">DOB</label>
+                        <input type="date" id="dob" name="dob" disabled value=<%- `"${user[0].DOB}"`
+                          -%>class="form-control
+                        form-control-lg" />
+
+                      </div>
+
+                      <div class="form-outline mb-4">
+                        <h3>Car Details</h3>
+                        <label class="form-label width-100" f>IE make</Details>
+
+                          <input type="text" id="model" name="make" value=<%- `"${user[0].carDetails.make}"` -%>
+                          class="form-control form-control-lg" />
+
+                        </label>
+                      </div>
+
+                      <div class="form-outline mb-4">
+                        <label class="form-label">Model</label>
+                        <input type="text" id="form3Example9 model" name="model" value=<%-
+                          `"${user[0].carDetails.model}"` -%>
+                        class="form-control form-control-lg" />
+
+                      </div>
+
+                      <div class="form-outline mb-4">
+                        <label class="form-label" for="form3Example9">Year</label>
+                        <input type="number" id="year" name="year" value=<%- `"${user[0].carDetails.year}"` -%>
+                        class="form-control
+                        form-control-lg" />
+
+                      </div>
+
+
+                      <div class="form-outline mb-4">
+                        <label class="form-label">Plat
+                          Number</label>
+                        <input type="text" id=" plateNumber" name="plateNumber" value=<%-
+                          `"${user[0].carDetails.plateNumber}"` -%>
+                        class="form-control form-control-lg" />
+
+                      </div>
+
+
+
+
+                      <div class="d-flex justify-content-end pt-3">
+
+                        <button type="submit" class="btn btn-secondary stb  btn-lg ms-2" id="submit">Update</button>
+                      </div>
+
+                  </form>
+
+                </div>
+                <% } else{ %>
+                  <div class="card-body p-md-5 text-black">
+                    <h2>NO DATA AVAIALABLE </h2>
+                    <p>Pls, Make Sure You have registered first</p>
+                    <a href="/G2" class="btn btn-primary   "> GO TO G2 PAGE</a>
+                  </div>
+                  <% } %>
+
+            </div>
+      </main>
+      <!-- Footer-->
+      <!-- Footer-->
+      <%- include('layouts/footer'); -%>
+        <%- include('layouts/scripts'); -%>
+  </body>
+
+</html>

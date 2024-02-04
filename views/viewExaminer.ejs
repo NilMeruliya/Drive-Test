@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('layouts/header'); -%>
+
+  <body>
+    <!-- Navigation-->
+    <%- include('layouts/navbar'); -%>
+      <!-- Page Header-->
+      <header class="masthead" style="background-image: url('assets/img/g2.jpg')">
+        <div class="container position-relative px-4 px-lg-5">
+          <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+              <div class="page-heading">
+                <h1>Examiner</h1>
+                <span class="subheading">User's Decision Page</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- Main Content-->
+      <main class="mb-4">
+
+        <div class="container px-4 px-lg-5">
+          <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+              <div class="my-5">
+
+                <% if (typeof user !=='undefined' && user) { %>
+
+                  <div class="card-body p-md-5 text-black">
+                    <h3 class="mb-5 text-uppercase text-center" style="color: #ff8243;"><%- `${user.fname}
+                        ${user.lname}` -%>'s
+                        Detail
+                    </h3>
+                    <form action="/modify_test" method="POST" id="form2">
+                      <div class="form-floating">
+                        <h3>Personal Details</h3>
+
+                        <div class="form-floating">
+
+
+                          <input type="text" id=" fname" disabled name="fname" value=<%- `"${user.fname}"` -%>
+                          class="form-control" />
+                          <label class="form-label">First name</label>
+
+                        </div>
+                        <div class="form-floating">
+
+
+                          <input type="text" id=" lname" disabled name="lname" value=<%- `"${user.lname}"`
+                            -%>class="form-control" />
+                          <label class="form-label">Last name</label>
+
+                        </div>
+                      </div>
+
+                      <input type="hidden" name="id" value=<%- `"${user._id}"` -%> />
+
+
+
+                      <div class="form-floating">
+
+                        <input type="text" id=" fname" disabled name="Date" value=<%- `"${user.appointmentId.Date}"` -%>
+                        class="form-control" />
+                        <label class="form-label">Appointment Date</label>
+
+                      </div>
+
+                      <div class="form-floating">
+
+
+                        <input type="text" id=" lname" disabled name="Time" value=<%- `"${user.appointmentId.Time}"`
+                          -%>class="form-control" />
+                        <label class="form-label">Appointment Time</label>
+
+
+                      </div>
+
+                      <h3>Car Details</h3>
+                      <div class="form-floating">
+
+
+
+
+                        <input type="text" id="model" disabled name="make" value=<%- `"${user.carDetails.make}"` -%>
+                        class="form-control" />
+                        <label class="form-label">Make</label>
+
+                        </label>
+
+                      </div>
+
+
+                      <div class="form-floating">
+
+
+                        <input type="text" id="form3Example9 model" disabled name="model" value=<%-
+                          `"${user.carDetails.model}"` -%>
+                        class="form-control form-control-lg" />
+                        <label class="form-label width-100">Model</label>
+
+                      </div>
+
+                      <div class="form-floating">
+
+
+                        <input type="number" id="year" name="year" disabled value=<%- `"${user.carDetails.year}"` -%>
+                        class="form-control
+                        form-control-lg" />
+                        <label class="form-label" for="form3Example9">Year</label>
+
+                      </div>
+
+                      <div class="form-floating">
+
+
+                        <input type="text" id=" plateNumber" disabled name="plateNumber" value=<%-
+                          `"${user.carDetails.plateNumber}"` -%>
+                        class="form-control form-control-lg" />
+                        <label class="form-label">Plat
+                          Number</label>
+
+                      </div>
+
+                      <div class="form-floating">
+
+                        <h3>Status</h3>
+
+                        <div class="form-check form-switch">
+
+                          <input type="radio" name="testResult" value="Pass" class="form-check-input" />
+                          <label class="form-check-label">Pass</label>
+                        </div>
+                        <div class="form-check form-switch">
+
+                          <input type="radio" name="testResult" value="Fail" checked class="form-check-input" />
+                          <label class="form-check-label">Fail</label>
+                        </div>
+
+
+                      </div>
+
+
+                      <div class="form-floating mb-4">
+
+                        <textarea id="form3Example9 model" name="Comments" class="form-control form-control-lg"
+                          cols="10" rows="3"></textarea>
+                        <label class="form-label">Comments</label>
+
+
+                      </div>
+
+                      <div class="d-flex justify-content-end pt-3">
+
+                        <button type="submit" class="btn btn-primary text-uppercase" id="submit">Update</button>
+                      </div>
+
+                    </form>
+
+                  </div>
+                  <% } else{ %>
+                    <div class="card-body p-md-5 text-black">
+                      <h2>NO DATA AVAIALABLE </h2>
+                      <p>Pls, Your are selecting right User</p>
+                      <a href="/examiner" class="btn btn-primary   "> GO TO Examiner</a>
+                    </div>
+                    <% } %>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <!-- Footer-->
+      <!-- Footer-->
+      <%- include('layouts/footer'); -%>
+        <%- include('layouts/scripts'); -%>
+  </body>
+
+</html>

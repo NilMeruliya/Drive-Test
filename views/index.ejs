@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('layouts/header'); -%>
+
+  <body>
+    <!-- Navigation-->
+    <%- include('layouts/navbar'); -%>
+      <!-- Page Header-->
+      <header class="masthead" style="background-image: url('assets/img/home.jpg')">
+        <div class="container position-relative px-4 px-lg-5">
+          <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+              <div class="site-heading">
+                <h1>Dashboard</h1>
+                <span class="subheading">DriveTest Booking Kisok</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- Main Content-->
+
+      <main class="mb-4">
+
+        <div class="container2">
+
+          <% if (typeof user !=='undefined' && user) { %>
+
+            <div class="card-body p-md-5 text-black">
+              <h3 class="mb-5 text-uppercase">User Details</h3>
+              <form id="form2">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <% if(user.testResult==="Pass" ){%>
+
+                      <div style="color: green; font-size: 30px;">
+                        <label>Status:</label>
+                        <label>
+                          <%= user.testResult %>
+                        </label>
+                      </div>
+                      <% }else{ %>
+
+                        <div style="color: red;font-size: 30px;">
+                          <label>Status:</label>
+                          <label>
+                            <%= user.testResult %>
+                          </label>
+                        </div>
+                        <% } %>
+                  </div>
+                </div>
+                <div class="row">
+
+
+
+                  <div class="col-md-6 mb-4">
+                    <h3>Personal Details</h3>
+                    <div class="form-outline">
+                      <label class="form-label">First name:</label>
+                      <label class="form-label">
+                        <%= user.fname%>
+                      </label>
+
+
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label class="form-label">Last name:</label>
+                      <label class="form-label">
+                        <%= user.lname%>
+                      </label>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+
+
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label class="form-label">Username:</label>
+                      <label class="form-label">
+                        <%= user.authId.Username %>
+                      </label>
+
+
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label class="form-label">TestType:</label>
+                      <label class="form-label">
+                        <%= user.testType %> TEST
+                      </label>
+
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label class="form-label">Appointment Date:</label>
+                      <label class="form-label">
+                        <%= user.appointmentId.Date %>
+                      </label>
+
+
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label class="form-label">Appointment Time:</label>
+                      <label class="form-label">
+                        <%=user.appointmentId.Time %>
+                      </label>
+
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+
+
+                  <h3>Car Details</h3>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+
+                      <label class="form-label ">Make:</label>
+                      <label class="form-label ">
+                        <%= user.carDetails.make %>
+                      </label>
+
+
+                      </label>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label class="form-label ">Model:</label>
+                      <label class="form-label ">
+                        <%= user.carDetails.model %>
+                      </label>
+
+
+
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label class="form-label" for="form3Example9">Year:</label>
+                      <label class="form-label" for="form3Example9">
+                        <%= user.carDetails.year %>
+                      </label>
+
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label class="form-label">Plat Number:</label>
+                      <label class="form-label">
+                        <%= user.carDetails.plateNumber %>
+                      </label>
+
+
+                    </div>
+                  </div>
+
+
+
+
+                  <div class="form-outline mb-4">
+                    <h4>Comments:</h4>
+                    <label class="form-label">
+
+                      <%= user.Comments %>
+                    </label>
+
+
+                  </div>
+
+
+                </div>
+
+              </form>
+
+            </div>
+            <% } else{ %>
+              <div class="container px-4 px-lg-5 cont">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                  <div class="col-md-10 col-lg-8 col-xl-7">
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                      <a href="#">
+                        <h2 class="post-title">You can book G2/G drive test from this kisok</h2>
+                        <h3 class="post-subtitle">You can book G2/G drive test from this kisok</h3>
+                      </a>
+                      
+                    </div>
+                    <!-- Pager-->
+                  </div>
+                </div>
+              </div>
+              <% } %>
+
+        </div>
+      </main>
+
+
+
+      <!-- Footer-->
+      <%- include('layouts/footer'); -%>
+        <%- include('layouts/scripts'); -%>
+  </body>
+
+</html>

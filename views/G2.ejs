@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('layouts/header'); -%>
+
+    <body>
+        <!-- Navigation-->
+        <%- include('layouts/navbar'); -%>
+            <!-- Page Header-->
+            <header class="masthead" style="background-image: url('assets/img/g2.jpg')">
+                <div class="container position-relative px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="page-heading">
+                                <h1>G2</h1>
+                                <span class="subheading">Please confirm your information</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- Main Content-->
+            <main class="mb-4">
+                <% if( typeof errs !=='undefined' && errs !=null && errs.length> 0) {%>
+                    <ul class="list-group">
+                        <% for ( let i in errs ) {%>
+                            <li class="list-group-item list-group-item-danger">
+                                <%= errs[i] %>
+                            </li>
+                            <% } %>
+                                <li class="list-group-item list-group-item-danger">Please Select Another Date
+                                </li>
+                    </ul>
+                    <% } %>
+                        <div class="container px-4 px-lg-5">
+                            <div class="row gx-4 gx-lg-5 justify-content-center">
+                                <div class="col-md-10 col-lg-8 col-xl-7">
+                                    <div class="my-5">
+                                        <form action="/selectDateForTest" method="POST">
+                                            <div class="form-floating">
+                                                <div class="col-252">
+                                                    <label>
+                                                        <h4>Appointment Slots</h4>
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                            <br>
+
+                                            <div class="form-floating">
+
+                                                <input type="Date" class="inp2" id="DOB" name="Date" placeholder="Date"
+                                                    required>
+
+                                            </div>
+                                            <br>
+                                            <input type="hidden" name="testType" value="G2" />
+
+                                            <div class="form-floating">
+                                                <input type="submit" value="Select the Date"
+                                                    class='btn btn-primary text-uppercase p-3'>
+                                            </div>
+                                        </form>
+                                        <% if( typeof available !=='undefined' && available !=null && available.length>
+                                            0) {
+                                            console.log(available,"date",Date) %>
+
+                                            <form action="/userInformation" method="POST">
+                                                <hr>
+
+                                                <div class="form-floating">
+                                                    <input type="date" class="form-control" name="Date"
+                                                        placeholder="Date" readonly value=<%- `"${Date}"` -%> >
+                                                    <label for="date">Appointment Date</label>
+
+                                                </div>
+                                                <div class="form-floating">
+                                                    <p style="display: inline-block;">Appointment Time</p>
+                                                    <select name="Time" style="display: inline-block;">
+
+                                                        <% for ( let i of available ) {%>
+                                                            <option value=<%- `"${i}"` -%> >
+                                                                <%= i %>
+                                                            </option>
+                                                            <% } %>
+                                                    </select>
+                                                </div>
+
+
+                                                <hr>
+
+
+                                                <span class="subheading fw-bold">Personal Details</span> <br /><br />
+
+                                                <div class="form-floating">
+                                                    <input class="form-control" id="fname" name="fname" type="text"
+                                                        placeholder="Enter your first name..."
+                                                        data-sb-validations="required" required />
+                                                    <label for=" fname">First Name</label>
+                                                    <div class="invalid-feedback" data-sb-feedback="fname:required">
+                                                        A
+                                                        first name
+                                                        is
+                                                        required.
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-floating">
+                                                    <input class="form-control" id="lname" name="lname" type="text"
+                                                        placeholder="Enter your last name..."
+                                                        data-sb-validations="required" required />
+                                                    <label for="lname">Last Name</label>
+                                                    <div class="invalid-feedback" data-sb-feedback="lname:required">
+                                                        A
+                                                        last name
+                                                        is
+                                                        required.</div>
+                                                </div>
+                                                <input type="hidden" name="testType" value="G2" />
+
+                                                <div class="form-floating">
+                                                    <input class="form-control" id="licenseNumber" name="licenseNumber"
+                                                        type="text" placeholder="Enter your Licence Number..."
+                                                        data-sb-validations="required" required />
+                                                    <label for="licenseNumber">Licence Number</label>
+                                                    <div class="invalid-feedback"
+                                                        data-sb-feedback="licenseNumber:required">
+                                                        A
+                                                        licence
+                                                        number
+                                                        is
+                                                        required.</div>
+                                                </div>
+
+
+                                                <div class="form-floating">
+                                                    <input class="form-control" id="Age" name="Age" type="number"
+                                                        placeholder="Enter your Age..."
+                                                        data-sb-validations="required" />
+                                                    <label for="Age">Age</label>
+                                                    <div class="invalid-feedback" data-sb-feedback="Age:required">A
+                                                        age
+                                                        is
+                                                        required.</div>
+                                                </div>
+
+                                                <div class="form-floating">
+                                                    <input class="form-control" id="DOB" name="DOB" type="date"
+                                                        placeholder="Enter your Date Of Birth..."
+                                                        data-sb-validations="required" required />
+                                                    <label for="DOB">Date Of Birth</label>
+                                                    <div class="invalid-feedback" data-sb-feedback="DOB:required">A
+                                                        date
+                                                        of
+                                                        birth
+                                                        is
+                                                        required.</div>
+                                                </div>
+
+                                                <br /><br /><span class="subheading fw-bold">Car Details</span>
+                                                <br /><br />
+
+                                                <!-- Car details > Make - String -->
+                                                <div class="form-floating">
+                                                    <input class="form-control" id="make" name="make" type="text"
+                                                        placeholder="Enter your car's make..."
+                                                        data-sb-validations="required" required />
+                                                    <label for="make">Make</label>
+                                                    <div class="invalid-feedback" data-sb-feedback="make:required">A
+                                                        make
+                                                        is
+                                                        required.</div>
+                                                </div>
+
+                                                <!-- Car details > Model - String -->
+                                                <div class="form-floating">
+                                                    <input class="form-control" id="model" name="model" type="text"
+                                                        placeholder="Enter your car's model..."
+                                                        data-sb-validations="required" required />
+                                                    <label for="model">Model</label>
+                                                    <div class="invalid-feedback" data-sb-feedback="model:required">
+                                                        A model
+                                                        is
+                                                        required.</div>
+                                                </div>
+
+                                                <div class="form-floating">
+                                                    <input class="form-control" id="year" name="year" type="number"
+                                                        placeholder="Enter your car's manufacturing year..."
+                                                        data-sb-validations="required" required />
+                                                    <label for="year">Year</label>
+                                                    <div class="invalid-feedback" data-sb-feedback="year:required">A
+                                                        year
+                                                        is
+                                                        required.</div>
+                                                </div>
+
+
+                                                <div class="form-floating">
+                                                    <input class="form-control" id="plateNumber" name="plateNumber"
+                                                        type="text" placeholder="Enter your car's plat number..."
+                                                        data-sb-validations="required" required />
+                                                    <label for="plateNumber">Plate Number</label>
+                                                    <div class="invalid-feedback"
+                                                        data-sb-feedback="plateNumber:required">A
+                                                        plat
+                                                        number
+                                                        is
+                                                        required.</div>
+                                                </div>
+                                                <br />
+
+                                                <button class="btn btn-primary text-uppercase" id="submitButton"
+                                                    type="submit">Submit</button>
+                                            </form>
+                                            <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            </main>
+            <!-- Footer-->
+            <!-- Footer-->
+            <%- include('layouts/footer'); -%>
+                <%- include('layouts/scripts'); -%>
+    </body>
+
+</html>
+
+</body>
+
+</html>

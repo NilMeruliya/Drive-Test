@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('layouts/header'); -%>
+
+    <body>
+        <!-- Navigation-->
+        <%- include('layouts/navbar'); -%>
+            <!-- Page Header-->
+            <header class="masthead" style="background-image: url('assets/img/g2.jpg')">
+                <div class="container position-relative px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="page-heading">
+                                <h1>Examiner</h1>
+                                <span class="subheading">All Users Details</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+
+            <!-- Main Content-->
+            <main class="mb-4">
+                <div class="container px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="my-5">
+
+                                <form class="ex-form" action="/sortExaminer" method="post">
+                                    <label>Filter By:</label>
+                                    <select name="testType">
+                                        <% if( typeof typeTest !=='undefined' ){ %>
+                                            <option value=<%=`${typeTest}` %> > <%= typeTest %>
+                                            </option>
+                                            <% } %>
+                                                <option value="All">All</option>
+                                                <option value="G">G</option>
+                                                <option value="G2">G2</option>
+
+                                    </select>
+                                    <br>
+                                    <input type="submit" class="btn btn-primary text-uppercase mt-4" value="Search"
+                                        id='btn-view'>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <% if( typeof users !=='undefined' && users !=null && users.length> 0) {
+
+
+                    for ( let user of users ) {
+                    %>
+                    <div class="container px-4 px-lg-5 cont">
+                        <div class="row gx-4 gx-lg-5 justify-content-center">
+                            <div class="col-md-10 col-lg-8 col-xl-7">
+                                <div class="my-5">
+                                    <div class="grider">
+                                        <div>
+                                            <label>Firstname:</label>
+                                            <label>
+                                                <%= user.fname %>
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>LastName:</label>
+                                            <label>
+                                                <%= user.lname %>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="grider">
+                                        <div>
+                                            <label>Date-Time:</label>
+                                            <label>
+                                                <%= user.appointmentId.Date %>
+                                            </label>-
+                                            <label>
+                                                <%= user.appointmentId.Time %>
+                                            </label>
+                                        </div>
+
+                                        <div>
+                                            <label>TestType:</label>
+                                            <label>
+                                                <%= user.testType %>
+                                            </label>
+                                        </div>
+                                        <br>
+                                        <form method="post" action="/displayUser">
+                                            <input type="hidden" name="id" value=<%- `"${user._id}"` -%> />
+
+                                            <input type="submit" class="btn btn-primary text-uppercase" value="View"
+                                                id='btn-view'>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <% } } %>
+                        <!-- <div class="container2">
+                    <% if( typeof errs !=='undefined' && errs !=null && errs.length> 0) {%>
+                        <ul class="list-group">
+                            
+
+ 
+
+                            <% for ( let i in errs ) {%>
+                                <li class="list-group-item list-group-item-danger">
+                                    <%= errs[i] %>
+                                </li>
+                                <% } %>
+                                <li class="list-group-item list-group-item-danger">Please add another slot</li>
+                        </ul>
+                        <% } %>
+
+                        <% if( typeof success !=='undefined' && success !=null && success.length> 0) {%>
+                            <ul class="list-group">
+                             
+                                <% for ( let i of success ) {%>
+                                    <li class="list-group-item list-group-item-success">
+                                        <%= i %>
+                                    </li>
+                                    <% } %>
+    
+                            </ul>
+                            <% } %>
+                            <form action="/selectDate" method="POST">
+                                <div class="row">
+                                    <div class="col-252">
+                                        <label>
+                                            <h4>Appointment Slots</h4>
+                                        </label>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-752">
+                                        <input type="Date" class="inp2" id="DOB" name="Date" placeholder="Date"
+                                            required>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-752">
+                                        <input type="submit" value="Select the Date" class='stb'>
+                                    </div>
+
+                                </div>
+                            </form>
+
+
+                            <% if( typeof available !=='undefined' && available !=null && available.length> 0) { console.log(available,"date",Date) %>
+                            <div class="row">
+                                <div class="col-752">
+                                    <input type="text" class="inp2 disable" disabled    name="Date" placeholder="Date"
+                                    value=<%- `"${Date}"`
+                                    -%> >
+
+                                </div>
+                            </div>
+                         
+                            <form action="/createSlot" method="POST">
+                                    <div class="row">
+                                        <div class="col-752">
+                                            <input type="hidden" class="inp2"  name="Date" placeholder="Date"
+                                            value=<%- `"${Date}"`
+                                            -%> >
+
+                                        </div>
+                                    </div>
+                                    <select class="inp2" name="Time">
+
+                                        <% for ( let i of available ) {%>
+                                            <option value=<%- `"${i}"` -%> >
+                                                <%= i %>
+                                            </option>
+                                            <% } %>
+                                    </select>
+                                    <div class="row">
+                                        <div class="col-752">
+                                            <input type="submit" value="Add Slot" class='stb'>
+                                        </div>
+
+                                    </div>
+                                </form>
+                                <% } %>
+
+                </div> -->
+            </main>
+            <!-- Footer-->
+            <!-- Footer-->
+            <%- include('layouts/footer'); -%>
+                <%- include('layouts/scripts'); -%>
+    </body>
+
+</html>
+
+</body>
+
+</html>
